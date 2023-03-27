@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -11,8 +12,7 @@ public class WorldTimeGetter : MonoBehaviour
     private string _currentMinute;
 
     public static WorldTimeGetter Instance;
-    public string CurrentHour => _currentHour;
-    public string CurrentMinute => _currentMinute;
+    public event Action<string, string> TimeChecked;
 
     private void Awake()
     {
@@ -56,6 +56,8 @@ public class WorldTimeGetter : MonoBehaviour
 
         _currentHour = parsedTime[0];
         _currentMinute = parsedTime[1];
+
+        TimeChecked.Invoke(_currentHour, _currentMinute);
 
         Debug.Log(_currentHour);
         Debug.Log(_currentMinute);
