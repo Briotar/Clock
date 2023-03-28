@@ -21,5 +21,8 @@ public class AnalogClock : MonoBehaviour
         HourHand.localRotation = Quaternion.Euler(0, 0, hourAngle);
         MinuteHand.localRotation = Quaternion.Euler(0, 0, minuteAngle);
         SecondHand.localRotation = Quaternion.Euler(0, 0, secondAngle);
+
+        //Debug.Log("Hour on clock:" + HourHand.eulerAngles.z);
+        //Debug.Log("Minute on clock:" + MinuteHand.eulerAngles.z);
     }
 }

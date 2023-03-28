@@ -44,8 +44,6 @@ public class WorldTimeGetter : MonoBehaviour
         else
             data = webRequest.downloadHandler.text;
 
-        Debug.Log("Data: " + data);
-
         ParseTime(data);
     }
 
@@ -58,8 +56,5 @@ public class WorldTimeGetter : MonoBehaviour
         _currentMinute = parsedTime[1];
 
         TimeChecked.Invoke(_currentHour, _currentMinute);
-
-        Debug.Log(_currentHour);
-        Debug.Log(_currentMinute);
     }
 }
