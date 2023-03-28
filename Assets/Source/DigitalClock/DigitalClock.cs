@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class DigitalClock : MonoBehaviour
 {
+    private int _maxHour = 23;
+    private int _maxMinute = 59;
+    private int _maxSecond = 59;
+
     private int _currentHours;
     private int _currentMinuts;
     private float _currentSeconds = 0;
@@ -28,21 +32,21 @@ public class DigitalClock : MonoBehaviour
 
     private void Update()
     {
-        if(_currentSeconds >= 0.05)
+        if(_currentSeconds >= _maxSecond)
         {
             _currentSeconds = 0;
             _currentMinuts++;
 
             MinutsChanched.Invoke(_currentMinuts);
 
-            if (_currentMinuts >= 59)
+            if (_currentMinuts >= _maxMinute)
             {
                 _currentMinuts = 0;
                 _currentHours++;
 
                 HoursChanched.Invoke(_currentHours);
 
-                if (_currentHours > 23)
+                if (_currentHours > _maxHour)
                 {
                     _currentHours = 0;
                     _currentMinuts = 0;
