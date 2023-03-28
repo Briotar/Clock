@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class DigitalClock : MonoBehaviour
 {
+    [SerializeField] private int _maxSecond = 59;
     private int _maxHour = 23;
-    private int _maxMinute = 59;
-    private int _maxSecond = 59;
+    private int _maxMinute = 60;
 
     private int _currentHours;
     private int _currentMinuts;
@@ -13,20 +13,21 @@ public class DigitalClock : MonoBehaviour
 
     public event Action<int> HoursChanched;
     public event Action<int> MinutsChanched;
+    public event Action<float> SecondsChanched;
 
     private void Start()
     {
-        WorldTimeGetter.Instance.TimeChecked += (hours, minuts) =>
+        WorldTimeGetter.Instance.TimeChecked += (hours, minuts, seconds) =>
         {
-            SetStartTime(hours, minuts);
+            SetWorldTime(hours, minuts, seconds);
         };
     }
 
     private void OnDisable()
     {
-        WorldTimeGetter.Instance.TimeChecked -= (hours, minuts) =>
+        WorldTimeGetter.Instance.TimeChecked -= (hours, minuts, seconds) =>
         {
-            SetStartTime(hours, minuts);
+            SetWorldTime(hours, minuts, seconds);
         };
     }
 
@@ -44,6 +45,7 @@ public class DigitalClock : MonoBehaviour
                 _currentMinuts = 0;
                 _currentHours++;
 
+                MinutsChanched.Invoke(_currentMinuts);
                 HoursChanched.Invoke(_currentHours);
 
                 if (_currentHours > _maxHour)
@@ -59,15 +61,19 @@ public class DigitalClock : MonoBehaviour
         else
         {
             _currentSeconds += Time.deltaTime;
+
+            SecondsChanched.Invoke(_currentSeconds);
         }
     }
 
-    private void SetStartTime(string hours, string minuts)
+    private void SetWorldTime(string hours, string minuts, string seconds)
     {
         _currentHours = Int32.Parse(hours);
         _currentMinuts = Int32.Parse(minuts);
+        _currentSeconds = Int32.Parse(seconds);
 
         MinutsChanched.Invoke(_currentMinuts);
         HoursChanched.Invoke(_currentHours);
+        SecondsChanched.Invoke(_currentSeconds);
     }
 }

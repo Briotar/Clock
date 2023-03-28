@@ -10,9 +10,10 @@ public class WorldTimeGetter : MonoBehaviour
 
     private string _currentHour;
     private string _currentMinute;
+    private string _currentSecond;
 
     public static WorldTimeGetter Instance;
-    public event Action<string, string> TimeChecked;
+    public event Action<string, string, string> TimeChecked;
 
     private void Awake()
     {
@@ -54,7 +55,8 @@ public class WorldTimeGetter : MonoBehaviour
 
         _currentHour = parsedTime[0];
         _currentMinute = parsedTime[1];
+        _currentSecond = parsedTime[2];
 
-        TimeChecked.Invoke(_currentHour, _currentMinute);
+        TimeChecked.Invoke(_currentHour, _currentMinute, _currentSecond);
     }
 }

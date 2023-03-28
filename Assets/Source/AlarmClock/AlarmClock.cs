@@ -8,6 +8,9 @@ public class AlarmClock : MonoBehaviour
     private int _hourAlarmRotation;
     private int _minuteAlarmRotation;
 
+    public int HourAlarmRotation => _hourAlarmRotation;
+    public int MinuteAlarmRotation => _minuteAlarmRotation;
+
     private void Start()
     {
         int hourDegreeIncrease = 360 / 12;
@@ -49,13 +52,13 @@ public class AlarmClock : MonoBehaviour
 
     public void SetAlarmTime(float hourHandRotation, float minuteHandRotation)
     {
-        Debug.Log("Hour rotation: " + hourHandRotation);
-        Debug.Log("Minute rotation: " + minuteHandRotation);
+        //Debug.Log("Hour rotation: " + hourHandRotation);
+        //Debug.Log("Minute rotation: " + minuteHandRotation);
 
         _hourAlarmRotation = SetAlarmTime((int)hourHandRotation, _hourDegree);
         _minuteAlarmRotation = SetAlarmTime((int)minuteHandRotation, _minuteDegree);
 
-        Debug.Log("Hour alarm rotation: " + _hourAlarmRotation);
-        Debug.Log("Minute alarm rotation: " + _minuteAlarmRotation);
+        //Debug.Log("Hour alarm rotation: " + _hourAlarmRotation);
+        //Debug.Log("Minute alarm rotation: " + _minuteAlarmRotation);
     }
 }

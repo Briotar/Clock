@@ -3,6 +3,7 @@ using UnityEngine;
 public class HandRotation : MonoBehaviour
 {
     private Vector3 mousePosition;
+    private float _angleToLookAtMouse = 90;
 
     void OnMouseDrag()
     {
@@ -12,6 +13,6 @@ public class HandRotation : MonoBehaviour
         difference.Normalize();
         float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.Euler(0f, 0f, rotation_z - 90);
+        transform.rotation = Quaternion.Euler(0f, 0f, rotation_z - _angleToLookAtMouse);
     }
 }
