@@ -1,16 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AlarmClock))]
+[RequireComponent(typeof(AnalogAlarmTime))]
 public class AlarmClockView : MonoBehaviour
 {
     [SerializeField] private Transform _hourHand;
     [SerializeField] private Transform _minuteHand;
 
-    private AlarmClock _alarmClock;
+    private AnalogAlarmTime _alarmClock;
 
     private void Start()
     {
-        _alarmClock = GetComponent<AlarmClock>();
+        _alarmClock = GetComponent<AnalogAlarmTime>();
     }
 
     public void OnAlarmButton()

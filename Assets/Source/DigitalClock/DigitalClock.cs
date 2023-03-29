@@ -11,6 +11,7 @@ public class DigitalClock : MonoBehaviour
     private int _currentMinuts;
     private float _currentSeconds = 0;
 
+    public int CurrentHour => _currentHours;
     public event Action<int> HoursChanched;
     public event Action<int> MinutsChanched;
     public event Action<float> SecondsChanched;

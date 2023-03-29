@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AlarmClock : MonoBehaviour
+public class AnalogAlarmTime : MonoBehaviour
 {
     private int[] _hourDegree = new int [12];
     private int[] _minuteDegree = new int[60];

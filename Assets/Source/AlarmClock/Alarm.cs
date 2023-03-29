@@ -1,38 +1,65 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AlarmClock))]
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private AnalogClock _analogClock;
     [SerializeField] private DigitalClock _digitalClock;
-    private AlarmClock _alarmClock;
+
+    private int _currentHour;
+    private int _currentMinute;
 
     public void OnAlarmButton()
     {
-        _alarmClock = GetComponent<AlarmClock>();
+        _currentHour = _digitalClock.CurrentHour;
 
         _digitalClock.HoursChanched += (hours) =>
         {
+            SetHour(hours);
             CheckTime();
         };
 
         _digitalClock.MinutsChanched += (minuts) =>
         {
+            SetMinute(minuts);
             CheckTime();
         };
     }
 
-    private void CheckTime()
+    private void OnDisable()
     {
-        //Debug.Log("Minute hand rotation: " + _analogClock.MinuteHandRotation);
-        //Debug.Log("Alarm rotation: " + _alarmClock.MinuteAlarmRotation);
-
-        float diffHour = Mathf.Abs(_analogClock.HourHandRotation - _alarmClock.HourAlarmRotation);
-        float diffMinute = Mathf.Abs(_analogClock.MinuteHandRotation - _alarmClock.MinuteAlarmRotation);
-
-        if (diffHour <= 0.1f && diffMinute <= 0.1f)
+        _digitalClock.HoursChanched -= (hours) =>
         {
-            Debug.Log("ALARM!!!!!!!!!!!!!!!!");
-        }
+            SetHour(hours);
+            CheckTime();
+        };
+
+        _digitalClock.MinutsChanched -= (minuts) =>
+        {
+            SetMinute(minuts);
+            CheckTime();
+        };
+    }
+
+    private void SetHour(int hour)
+    {
+        _currentHour = hour;
+    }
+
+    private void SetMinute(int minute)
+    {
+        _currentMinute = minute;
+    }
+
+    protected int GetHour()
+    {
+        return _currentHour;
+    }
+
+    protected int GetMinute()
+    {
+        return _currentMinute;
+    }
+
+    protected virtual void CheckTime()
+    {
     }
 }
