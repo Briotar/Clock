@@ -49,19 +49,19 @@ public class AnalogClock : MonoBehaviour
 
     private void SetHour(int hour)
     {
-        float hourAngle = -360 * ((float)hour / 12);
+        float hourAngle = 360 * ((float)hour / 12);
         HourHand.localRotation = Quaternion.Euler(0, 0, hourAngle);
     }
 
     private void SetMinute(int minute)
     {
-        float minuteAngle = -360 * ((float)minute / 60);
+        float minuteAngle = 360 * ((float)minute / 60);
         MinuteHand.localRotation = Quaternion.Euler(0, 0, minuteAngle);
     }
 
     private void SetSecond(float second)
     {
-        float secondAngle = -360 * (second / 60);
+        float secondAngle = 360 * (second / 60);
         SecondHand.localRotation = Quaternion.Euler(0, 0, secondAngle);
     }
 }

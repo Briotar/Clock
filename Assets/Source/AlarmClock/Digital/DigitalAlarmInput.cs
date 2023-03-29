@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
+using TMPro;
 
 public class DigitalAlarmInput : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _alarmText;
+
     private int _alarmMinute = -1;
     private int _alarmHour = -1;
 
@@ -16,7 +19,7 @@ public class DigitalAlarmInput : MonoBehaviour
     {
         if(_isHourEntered && _isMinuteEntered)
         {
-            Debug.Log("Будьник готов!" + _alarmHour + " " + _alarmMinute);
+            _alarmText.text = "Будильник прозвонит в " + _alarmHour + ":" + _alarmMinute;
         }
     }
 
@@ -24,9 +27,17 @@ public class DigitalAlarmInput : MonoBehaviour
     {
         if (Int32.TryParse(minute, out _alarmMinute))
         {
-            Debug.Log(_alarmMinute);
-            _isMinuteEntered = true;
-            CheckIsAlarmReady();
+            if(_alarmMinute < 0 || _alarmMinute > 59)
+            {
+                Debug.Log("Неверный ввод!");
+                return;
+            }
+            else
+            {
+                Debug.Log(_alarmMinute);
+                _isMinuteEntered = true;
+                CheckIsAlarmReady();
+            }
         }
         else
         {
@@ -38,13 +49,27 @@ public class DigitalAlarmInput : MonoBehaviour
     {
         if(Int32.TryParse(hour, out _alarmHour))
         {
-            Debug.Log(_alarmHour);
-            _isHourEntered = true;
-            CheckIsAlarmReady();
+            if(_alarmHour < 0 || _alarmHour > 23)
+            {
+                Debug.Log("Неверный ввод!");
+                return;
+            }
+            else
+            {
+                Debug.Log(_alarmHour);
+                _isHourEntered = true;
+                CheckIsAlarmReady();
+            }
         }
         else
         {
             Debug.Log("Неверный ввод!");
         }
+    }
+
+    public void AlarmOff()
+    {
+        _alarmMinute = -1;
+        _alarmHour = -1;
     }
 }
