@@ -34,7 +34,6 @@ public class DigitalAlarmInput : MonoBehaviour
             }
             else
             {
-                Debug.Log(_alarmMinute);
                 _isMinuteEntered = true;
                 CheckIsAlarmReady();
             }
@@ -56,7 +55,6 @@ public class DigitalAlarmInput : MonoBehaviour
             }
             else
             {
-                Debug.Log(_alarmHour);
                 _isHourEntered = true;
                 CheckIsAlarmReady();
             }

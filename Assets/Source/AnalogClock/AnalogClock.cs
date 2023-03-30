@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class AnalogClock : MonoBehaviour
 {
-    [SerializeField] private DigitalClock _digitalClock;
     [SerializeField] private Transform HourHand;
     [SerializeField] private Transform MinuteHand;
     [SerializeField] private Transform SecondHand;
@@ -13,17 +12,17 @@ public class AnalogClock : MonoBehaviour
 
     private void Start()
     {
-        _digitalClock.HoursChanched += (hours) =>
+        LocalTime.Instance.HoursChanched += (hours) =>
         {
             SetHour(hours);
         };
 
-        _digitalClock.MinutsChanched += (minuts) =>
+        LocalTime.Instance.MinutsChanched += (minuts) =>
         {
             SetMinute(minuts);
         };
 
-        _digitalClock.SecondsChanched += (seconds) =>
+        LocalTime.Instance.SecondsChanched += (seconds) =>
         {
             SetSecond(seconds);
         };
@@ -31,17 +30,17 @@ public class AnalogClock : MonoBehaviour
 
     private void OnDisable()
     {
-        _digitalClock.HoursChanched -= (hours) =>
+        LocalTime.Instance.HoursChanched -= (hours) =>
         {
             SetHour(hours);
         };
 
-        _digitalClock.MinutsChanched -= (minuts) =>
+        LocalTime.Instance.MinutsChanched -= (minuts) =>
         {
             SetMinute(minuts);
         };
 
-        _digitalClock.SecondsChanched -= (seconds) =>
+        LocalTime.Instance.SecondsChanched -= (seconds) =>
         {
             SetSecond(seconds);
         };

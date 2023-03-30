@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
 
-public class DigitalClock : MonoBehaviour
+public class LocalTime : MonoBehaviour
 {
     [SerializeField] private int _maxSecond = 59;
+
     private int _maxHour = 23;
     private int _maxMinute = 60;
 
@@ -15,6 +16,21 @@ public class DigitalClock : MonoBehaviour
     public event Action<int> HoursChanched;
     public event Action<int> MinutsChanched;
     public event Action<float> SecondsChanched;
+
+    public static LocalTime Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+    }
 
     private void Start()
     {

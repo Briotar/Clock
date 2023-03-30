@@ -2,22 +2,20 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private DigitalClock _digitalClock;
-
     private int _currentHour;
     private int _currentMinute;
 
     public void OnAlarmButton()
     {
-        _currentHour = _digitalClock.CurrentHour;
+        _currentHour = LocalTime.Instance.CurrentHour;
 
-        _digitalClock.HoursChanched += (hours) =>
+        LocalTime.Instance.HoursChanched += (hours) =>
         {
             SetHour(hours);
             CheckTime();
         };
 
-        _digitalClock.MinutsChanched += (minuts) =>
+        LocalTime.Instance.MinutsChanched += (minuts) =>
         {
             SetMinute(minuts);
             CheckTime();
@@ -26,13 +24,13 @@ public class Alarm : MonoBehaviour
 
     private void OnDisable()
     {
-        _digitalClock.HoursChanched -= (hours) =>
+        LocalTime.Instance.HoursChanched -= (hours) =>
         {
             SetHour(hours);
             CheckTime();
         };
 
-        _digitalClock.MinutsChanched -= (minuts) =>
+        LocalTime.Instance.MinutsChanched -= (minuts) =>
         {
             SetMinute(minuts);
             CheckTime();

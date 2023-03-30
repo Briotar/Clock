@@ -72,14 +72,8 @@ public class AnalogAlarmTime : MonoBehaviour
 
     public void SetAlarmTime(float hourHandRotation, float minuteHandRotation)
     {
-        //Debug.Log("Hour rotation: " + hourHandRotation);
-        //Debug.Log("Minute rotation: " + minuteHandRotation);
-
         _hourAlarmRotation = SetAlarmTime((int)hourHandRotation, _hourDegree, true);
         _minuteAlarmRotation = SetAlarmTime((int)minuteHandRotation, _minuteDegree, false);
-
-        //Debug.Log("Hour alarm rotation: " + _hourAlarmRotation);
-        //Debug.Log("Minute alarm rotation: " + _minuteAlarmRotation);
 
         _alarmText.text = "Будильник прозвонит в " + _hourAlarm + ":" + _minuteAlarm + " по аналоговым часам";
     }

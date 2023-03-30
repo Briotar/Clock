@@ -1,25 +1,21 @@
 using UnityEngine;
 using TMPro;
 
-[RequireComponent(typeof(DigitalClock))]
 public class DigitalClockView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _hours;
     [SerializeField] private TMP_Text _minuts;
 
-    private DigitalClock _digitalClock;
     private int TwoDigitNumber = 10;
 
     private void Start()
     {
-        _digitalClock = GetComponent<DigitalClock>();
-
-        _digitalClock.HoursChanched += (hours) =>
+        LocalTime.Instance.HoursChanched += (hours) =>
         {
             SetTime(_hours, hours);
         };
 
-        _digitalClock.MinutsChanched += (minuts) =>
+        LocalTime.Instance.MinutsChanched += (minuts) =>
         {
             SetTime(_minuts, minuts);
         };
@@ -27,12 +23,12 @@ public class DigitalClockView : MonoBehaviour
 
     private void OnDisable()
     {
-        _digitalClock.HoursChanched -= (hours) =>
+        LocalTime.Instance.HoursChanched -= (hours) =>
         {
             SetTime(_hours, hours);
         };
 
-        _digitalClock.MinutsChanched -= (minuts) =>
+        LocalTime.Instance.MinutsChanched -= (minuts) =>
         {
             SetTime(_minuts, minuts);
         };
